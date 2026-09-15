@@ -63,6 +63,8 @@ def build_html():
     (OUT / 'index.html').write_text(page, encoding='utf-8')
     shutil.copyfile(ROOT / 'style.css', OUT / 'style.css')
     (OUT / '.nojekyll').touch()
+    from build_designs import build_designs
+    build_designs()
 
 
 def build_pdf(font_path):
