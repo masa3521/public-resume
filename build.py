@@ -102,6 +102,8 @@ def build_pdf(font_path):
     story += [heading('03  職歴一覧'),grid(['期間','事業・領域','役割'],DATA['history'],[112,175,204]),Spacer(1,7),para(DATA['history_note'],'small'),heading('04  案件経験')]
     story += project(DATA['projects'][0])
     for p in DATA['projects'][1:]:
+        if p['id'] == 'telecom':
+            story.append(PageBreak())
         story += [KeepTogether(project(p))]
     story += [heading('05  資格・仕事の進め方'),para(DATA['qualifications']),para(DATA['approach'])]
     def footer(canvas, doc):

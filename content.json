@@ -2,7 +2,7 @@
   "name": "浜田 将彰",
   "name_en": "Masaaki Hamada",
   "title": "クラウド・IaC エンジニア / CTO",
-  "updated": "2026年9月14日",
+  "updated": "2026年9月15日",
   "experience_as_of": "経験年数は2026年8月時点の概算です。並行して担当した期間は単純合算していません。",
   "summary": "物理サーバ・ネットワークからクラウド基盤まで、15年以上にわたり設計・構築・運用を経験。AWSを約10年、Azure・Terraformを約3.5年扱い、クラウド移行、IaC、CI/CD、監視設計に取り組んできました。2022年からは自社サービスの取締役・CTOとして、企画から開発・インフラ・運用までを担当しています。",
   "strengths": [
@@ -11,25 +11,27 @@
     {"title": "小規模サービスを企画から運用まで担う", "text": "自社サービスではWeb開発・SaaS連携・クラウド基盤を横断して担当。AIを活用した手順化・自動化にも取り組んでいます。"}
   ],
   "skills": [
-    ["AWS", "約10年", "EC2 / ECS / Lambda / RDS / S3 / ALB / CloudFront / CloudWatchなど。設計・構築、移行、運用改善。"],
+    ["AWS", "約10年", "EC2 / ECS / Lambda / RDS / S3 / ALB / CloudFront / CloudWatchなど。設計・構築、移行、運用改善。Amplify / API Gateway / Cognito / DynamoDBによるWebアプリ基盤も構築。"],
     ["Azure", "約3.5年", "VMSS / App Service / Storage / DNS / Automation / Monitor / Log Analyticsなど。基盤・監視設計。"],
     ["Terraform", "約3.5年", "開発・検証・本番環境のIaC化、環境構築の再現性向上。"],
     ["構成管理・CI/CD", "Ansible 約6年", "Ansible / CloudFormation / GitHub Actions / Jenkinsによる構成管理・デプロイ自動化。"],
     ["コンテナ", "Docker 約7年", "Docker / ECSによるコンテナ環境の構築。"],
     ["OS・ネットワーク", "Linux 15年以上", "Linux / Windows Server / Active Directory、物理サーバ・L2/L3ネットワークの設計・構築・運用。"],
+    ["フロントエンド", "受託・自社開発で使用", "React / Material UIによるレスポンシブ画面、動画再生・検索・ログインの実装。JavaScriptを中心に、一部TypeScriptを使用。"],
     ["Web・SaaS連携", "Shopify 約4.5年", "Shopify / Liquid / 各種API連携。Next.js / TypeScript / Vercel / Supabaseは2026年から。"],
     ["言語・データベース", "案件ごとに使用", "Python / PowerShell / JavaScript / TypeScript。MySQL / PostgreSQL / Oracle / Azure SQL Databaseなど。"],
     ["AI・開発支援", "Claude Code 2025年から", "Claude Code / MCPによる開発・運用支援、OpenAI APIのサービス連携。"]
   ],
   "history": [
     ["2022/03 - 現在", "自社サービス", "取締役 / CTO"],
+    ["2022/07 開始", "会員向け動画サービス", "開発全般・運用・保守 / 受託"],
     ["2020/01 - 2023/06", "決済プラットフォーム", "クラウドエンジニア / 業務委託"],
     ["2018/01 - 2019/12", "通信サービス基盤", "クラウドエンジニア / 業務委託"],
     ["2014/12 - 2016/07", "通信サービス基盤", "クラウドエンジニア / 派遣"],
     ["2013/09 - 2014/11", "通信キャリア向けシステム", "カスタマーエンジニア / 派遣"],
     ["2008/04 - 2013/01", "事業会社の社内インフラ", "社内SE"]
   ],
-  "history_note": "2022/03 - 2023/06は自社サービスと業務委託を並行。2013/02 - 08は資格取得期間、2016/12 - 2017/12はカナダへ語学留学。",
+  "history_note": "動画サービスの受託案件は2022/07 - 09に開発、2022/10以降は修正・運用・保守を担当。自社サービス・業務委託と並行。2013/02 - 08は資格取得期間、2016/12 - 2017/12はカナダへ語学留学。",
   "projects": [
     {
       "id": "own-service", "title": "自社サービスの開発・運用", "period": "2022/03 - 現在", "role": "取締役 / CTO", "phases": "企画・技術選定・設計・実装・運用",
@@ -41,6 +43,16 @@
         ["移行に関する技術調整", "2026/03 - 07は外部事業者のAWS移行で構成レビュー、セッション障害への対応案の比較、DNS切り替え前後の確認を担当。移行作業はベンダー・事業側が実施しました。"]
       ],
       "tech": "AWS / Shopify / Liquid / Node.js / Python / Next.js / TypeScript / Vercel / Supabase / Playwright / Claude Code / MCP"
+    },
+    {
+      "id": "member-video", "title": "動画配信サービス向け会員マイページの受託開発", "period": "開発：2022/07 - 09 ／ 修正・運用・保守：2022/10以降", "role": "Webアプリケーション開発 / 受託", "phases": "フロントエンド・API・AWS基盤の開発全般、修正・運用・保守",
+      "overview": "会員向け動画閲覧Webアプリケーションを受託開発。Reactによる画面、外部動画APIと連携するバックエンド、AWS上の認証・配信環境まで開発全般を担当し、開発後も修正・運用・保守を行いました。",
+      "items": [
+        ["動画閲覧・検索画面", "React・Material UIでPC・スマートフォン対応の画面を実装。Vimeoの動画再生、タイトル・講師・カテゴリ・タグ検索、新着・おすすめ動画の表示に対応しました。"],
+        ["外部API連携とAWS基盤", "Amplify・Lambda・API Gatewayで動画情報取得APIを実装。Cognitoによるログイン、S3・CloudFrontによる配信環境、DynamoDBからの画面用パラメータ取得を構成しました。"],
+        ["利用・管理上の改善", "日本語検索の文字正規化、通信リトライ、読み込み中・エラー表示に対応。会員CSVからCognitoへ一括登録する処理も実装しました。"]
+      ],
+      "tech": "React / JavaScript / TypeScript（一部）/ Material UI / Node.js / AWS Amplify / Lambda / API Gateway / Cognito / S3 / CloudFront / DynamoDB / Vimeo API"
     },
     {
       "id": "payments", "title": "決済プラットフォームのクラウド基盤", "period": "2020/01 - 2023/06", "role": "クラウドエンジニア / 業務委託", "phases": "基盤設計・構築・IaC化・CI/CD・監視設計",
