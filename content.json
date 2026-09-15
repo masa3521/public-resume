@@ -1,0 +1,78 @@
+{
+  "name": "浜田 将彰",
+  "name_en": "Masaaki Hamada",
+  "title": "クラウド・IaC エンジニア / CTO",
+  "updated": "2026年9月14日",
+  "experience_as_of": "経験年数は2026年8月時点の概算です。並行して担当した期間は単純合算していません。",
+  "summary": "物理サーバ・ネットワークからクラウド基盤まで、15年以上にわたり設計・構築・運用を経験。AWSを約10年、Azure・Terraformを約3.5年扱い、クラウド移行、IaC、CI/CD、監視設計に取り組んできました。2022年からは自社サービスの取締役・CTOとして、企画から開発・インフラ・運用までを担当しています。",
+  "strengths": [
+    {"title": "クラウド基盤を設計し、コードで再現する", "text": "AWS・Azureの基盤設計から、Terraformによる開発・検証・本番環境の構築、CI/CD・監視設計まで対応します。"},
+    {"title": "既存環境の運用とコストを改善する", "text": "オンプレミスからAWSへの移行、リソースの適正化、構成管理・ログ分析の自動化など、運用上の課題を実装で改善してきました。"},
+    {"title": "小規模サービスを企画から運用まで担う", "text": "自社サービスではWeb開発・SaaS連携・クラウド基盤を横断して担当。AIを活用した手順化・自動化にも取り組んでいます。"}
+  ],
+  "skills": [
+    ["AWS", "約10年", "EC2 / ECS / Lambda / RDS / S3 / ALB / CloudFront / CloudWatchなど。設計・構築、移行、運用改善。"],
+    ["Azure", "約3.5年", "VMSS / App Service / Storage / DNS / Automation / Monitor / Log Analyticsなど。基盤・監視設計。"],
+    ["Terraform", "約3.5年", "開発・検証・本番環境のIaC化、環境構築の再現性向上。"],
+    ["構成管理・CI/CD", "Ansible 約6年", "Ansible / CloudFormation / GitHub Actions / Jenkinsによる構成管理・デプロイ自動化。"],
+    ["コンテナ", "Docker 約7年", "Docker / ECSによるコンテナ環境の構築。"],
+    ["OS・ネットワーク", "Linux 15年以上", "Linux / Windows Server / Active Directory、物理サーバ・L2/L3ネットワークの設計・構築・運用。"],
+    ["Web・SaaS連携", "Shopify 約4.5年", "Shopify / Liquid / 各種API連携。Next.js / TypeScript / Vercel / Supabaseは2026年から。"],
+    ["言語・データベース", "案件ごとに使用", "Python / PowerShell / JavaScript / TypeScript。MySQL / PostgreSQL / Oracle / Azure SQL Databaseなど。"],
+    ["AI・開発支援", "Claude Code 2025年から", "Claude Code / MCPによる開発・運用支援、OpenAI APIのサービス連携。"]
+  ],
+  "history": [
+    ["2022/03 - 現在", "自社サービス", "取締役 / CTO"],
+    ["2020/01 - 2023/06", "決済プラットフォーム", "クラウドエンジニア / 業務委託"],
+    ["2018/01 - 2019/12", "通信サービス基盤", "クラウドエンジニア / 業務委託"],
+    ["2014/12 - 2016/07", "通信サービス基盤", "クラウドエンジニア / 派遣"],
+    ["2013/09 - 2014/11", "通信キャリア向けシステム", "カスタマーエンジニア / 派遣"],
+    ["2008/04 - 2013/01", "事業会社の社内インフラ", "社内SE"]
+  ],
+  "history_note": "2022/03 - 2023/06は自社サービスと業務委託を並行。2013/02 - 08は資格取得期間、2016/12 - 2017/12はカナダへ語学留学。",
+  "projects": [
+    {
+      "id": "own-service", "title": "自社サービスの開発・運用", "period": "2022/03 - 現在", "role": "取締役 / CTO", "phases": "企画・技術選定・設計・実装・運用",
+      "overview": "オンライン予約・配信を伴うサブスクリプションサービスの技術全般を担当。事業運営に関わりながら、Webアプリ、外部サービス連携、クラウド基盤を開発・運用しています。",
+      "items": [
+        ["予約・課金・配信の統合", "Shopify・予約・課金・配信サービスを連携。複数のタイムゾーンを扱う予約処理や、AWS Lambdaによる配信アカウントの自動割り当てを実装しました。"],
+        ["運用と保管コストの改善", "S3のライフサイクルを設計して録画の保管コストを削減。CloudWatchからの通知を整備し、定型作業の手順化・自動化に取り組みました。"],
+        ["法人向けポータルの立ち上げ", "2026年からNext.js・Supabaseで開発。検証・本番を分離し、PlaywrightによるE2Eテストを本番データから隔離する構成を設計しました。"],
+        ["移行に関する技術調整", "2026/03 - 07は外部事業者のAWS移行で構成レビュー、セッション障害への対応案の比較、DNS切り替え前後の確認を担当。移行作業はベンダー・事業側が実施しました。"]
+      ],
+      "tech": "AWS / Shopify / Liquid / Node.js / Python / Next.js / TypeScript / Vercel / Supabase / Playwright / Claude Code / MCP"
+    },
+    {
+      "id": "payments", "title": "決済プラットフォームのクラウド基盤", "period": "2020/01 - 2023/06", "role": "クラウドエンジニア / 業務委託", "phases": "基盤設計・構築・IaC化・CI/CD・監視設計",
+      "overview": "Azureを主軸にAWSも併用する決済サービスのインフラを担当。アプリケーション開発チームと分担し、クラウド基盤の設計・構築を担いました。",
+      "items": [
+        ["環境構築のコード化", "Terraformで開発・検証・本番環境をIaC化。GitHub ActionsによるCI/CDと合わせ、環境構築を再現できる形に整えました。"],
+        ["コンテナ・監視の整備", "Docker・ECSによるコンテナ化、Ansibleによる構成管理を実施。Azure Monitor・Log Analytics・CloudWatchで監視と通知を設計しました。"]
+      ],
+      "tech": "Azure / AWS / Terraform / GitHub Actions / Docker / ECS / Ansible / Azure Monitor / Log Analytics / CloudWatch"
+    },
+    {
+      "id": "telecom", "title": "通信サービス基盤のAWS移行・運用改善", "period": "2014/12 - 2016/07、2018/01 - 2019/12", "role": "クラウドエンジニア / 派遣・業務委託", "phases": "設計・構築・移行・運用改善",
+      "overview": "無線通信サービスの基盤設計・構築・運用を担当。オンプレミスからAWSへの移行と、クラウド環境の最適化・自動化に取り組みました。",
+      "items": [
+        ["クラウド移行とコスト最適化", "AWS移行に加え、Auto Scalingによる時間帯別のリソース調整、過剰リソースの見直し、スポット・リザーブドインスタンスの活用でコストを削減しました。"],
+        ["再現性と調査効率の改善", "CloudFormationで環境をコード化し、Ansible・Jenkinsで構築を自動化。EMR・PySparkによるログ分析で調査時間を短縮しました。"]
+      ],
+      "tech": "AWS / EC2 / Auto Scaling / CloudFormation / Ansible / Jenkins / EMR / PySpark / Linux"
+    },
+    {
+      "id": "carrier", "title": "通信キャリア向けシステムの構築・保守", "period": "2013/09 - 2014/11", "role": "カスタマーエンジニア / 派遣", "phases": "構築・保守・進捗管理・品質管理",
+      "overview": "通信キャリア向けシステムの保守・運用と認証データベース基盤の構築を担当しました。",
+      "items": [["実装とプロジェクト管理", "PMを兼任し、進捗・品質管理と並行して物理サーバ、Ciscoネットワーク機器の構築、構築手順書の作成を担当しました。"]],
+      "tech": "物理サーバ / Cisco / 認証データベース基盤"
+    },
+    {
+      "id": "internal", "title": "社内インフラ・ネットワークの設計・運用", "period": "2008/04 - 2013/01", "role": "社内SE", "phases": "設計・構築・運用・障害対応",
+      "overview": "社内サーバとネットワークの設計・構築・運用を担当しました。",
+      "items": [["物理基盤から利用者支援まで", "LinuxのWeb・メール・DNS、WindowsのActive Directory・ファイルサーバを構築・運用。L2/L3スイッチの導入・配線・設定、障害対応、ヘルプデスクまで対応しました。"]],
+      "tech": "Linux / Windows Server / Active Directory / L2・L3ネットワーク"
+    }
+  ],
+  "qualifications": "基本情報技術者。LPIC-3・CCNAは取得歴あり（現在は失効）。",
+  "approach": "クラウド基盤の専門性を軸に、必要に応じてアプリケーションやSaaS連携まで担当します。IaCと設計ドキュメントで再現・引き継ぎができる状態をつくり、繰り返し作業は手順化・自動化して改善を続けます。"
+}
