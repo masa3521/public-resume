@@ -1,5 +1,6 @@
 """Generate the public website and A4 resume from one content.json source."""
 import argparse
+import hashlib
 import html
 import json
 from pathlib import Path
@@ -37,6 +38,8 @@ def project_html(p):
 
 
 def build_html():
+    revision = hashlib.sha256((ROOT / 'content.json').read_bytes()).hexdigest()[:12]
+    pdf_link = f'resume.pdf?v={revision}'
     nav = ''.join(f'<a href="#{key}">{label}</a>' for key, label in NAV)
     strengths = ''.join(f'<li><h3>{E(s["title"])}</h3><p>{E(s["text"])}</p></li>' for s in DATA['strengths'])
     page = f'''<!doctype html>
@@ -46,7 +49,7 @@ def build_html():
 <meta name="theme-color" content="#225b89"><link rel="stylesheet" href="style.css"></head>
 <body><a class="skip" href="#main">本文へ移動</a>
 <header class="topbar"><div class="topbar-inner"><a class="brand" href="#">MASAAKI HAMADA / RESUME</a>
-<a class="download" href="resume.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>PDF版を開く</a></div></header>
+<a class="download" href="{pdf_link}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>PDF版を開く</a></div></header>
 <div class="layout"><aside class="sidebar"><p class="nav-label">CONTENTS</p><nav aria-label="目次">{nav}</nav><p class="small">更新：{E(DATA['updated'])}<br>Web版・PDF版は同じ内容です。</p></aside>
 <main id="main"><header class="identity"><p class="eyebrow">職務経歴書</p><h1>{E(DATA['name'])}</h1><p class="name-en">{E(DATA['name_en'])}</p><p class="role">{E(DATA['title'])}</p><p class="updated">最終更新：{E(DATA['updated'])}</p></header>
 <nav class="mobile-nav" aria-label="モバイル目次">{nav}</nav>
@@ -55,7 +58,7 @@ def build_html():
 <section id="history"><h2><span class="number">03</span>職歴一覧</h2>{table_html(['期間','事業・領域','役割'],DATA['history'],'history')}<p class="note">{E(DATA['history_note'])}</p></section>
 <section id="experience"><h2><span class="number">04</span>案件経験</h2>{''.join(project_html(p) for p in DATA['projects'])}</section>
 <section id="about" class="closing"><h2><span class="number">05</span>資格・仕事の進め方</h2><p>{E(DATA['qualifications'])}</p><p>{E(DATA['approach'])}</p></section>
-<footer class="footer"><span>{E(DATA['name_en'])}</span><a href="resume.pdf">PDF版を開く</a><a href="#">先頭へ戻る ↑</a></footer></main></div>
+<footer class="footer"><span>{E(DATA['name_en'])}</span><a href="{pdf_link}">PDF版を開く</a><a href="#">先頭へ戻る ↑</a></footer></main></div>
 </body></html>'''
     (OUT / 'index.html').write_text(page, encoding='utf-8')
     shutil.copyfile(ROOT / 'style.css', OUT / 'style.css')
