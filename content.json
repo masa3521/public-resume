@@ -38,13 +38,14 @@
       "overview": "オンラインレッスンのサブスクリプションサービスで技術全般を担当。予約連携、AIレポート、会議アカウント管理を要件定義から設計・開発、運用・保守まで担い、事業運営と並行して改善しています。",
       "items": [
         ["予約・受講履歴のAPI連携", "Node.js・ExpressでShopifyと予約・契約情報を連携。予約情報・受講URL・タイムゾーンを保存し、予約変更・キャンセルに合わせた会議情報の更新、顧客別の受講履歴・注文履歴の取得、レッスン単位のコメント管理を実装しました。"],
-        ["AIレッスンレポートの生成・配信", "Python・AWS Lambdaでレッスン字幕を取得し、OpenAI APIによるレポート生成、メール配信、Shopifyへの保存を自動化。字幕生成の遅延に対応する再試行と、重複処理を抑える実行ロックを実装しました。"],
+        ["AIレッスンレポートの生成・配信", "Python・AWS Lambdaでレッスン字幕を取得し、OpenAI APIによるレポート生成、メール配信、Shopifyへの保存を自動化。字幕生成の遅延に対応する再試行と、重複処理を抑える実行ロックを実装しました。2025年3月18日に正式リリース。"],
         ["会議アカウントの自動割り当て", "Python・AWS Lambdaで複数のZoomアカウントの会議予定を調べ、開始・終了時刻の重複判定で空きアカウントを選定。会議の作成・削除とGoogle Calendar・スプレッドシートへの記録を連携しました。"],
         ["運用と保管コストの改善", "S3のライフサイクルを設計して録画の保管コストを削減。CloudWatchからの通知を整備し、定型作業の手順化・自動化に取り組みました。"],
         ["法人向けポータルの立ち上げ", "2026年からNext.js・Supabaseで開発。検証・本番を分離し、PlaywrightによるE2Eテストを本番データから隔離する構成を設計しました。"],
         ["移行に関する技術調整", "2026/03 - 07は外部事業者のAWS移行で構成レビュー、セッション障害への対応案の比較、DNS切り替え前後の確認を担当。移行作業はベンダー・事業側が実施しました。"]
       ],
-      "tech": "AWS Lambda / API Gateway / DynamoDB / S3 / Docker / Shopify Admin GraphQL API・App Proxy / Liquid / Node.js / Express / Python / OpenAI API / Zoom API / Google APIs / Next.js / TypeScript / Vercel / Supabase / Playwright / Claude Code / MCP"
+      "tech": "AWS Lambda / API Gateway / DynamoDB / S3 / Docker / Shopify Admin GraphQL API・App Proxy / Liquid / Node.js / Express / Python / OpenAI API / Zoom API / Google APIs / Next.js / TypeScript / Vercel / Supabase / Playwright / Claude Code / MCP",
+      "references": [["AIレッスンレポートの正式リリース（PR TIMES・2025/03/23）", "https://prtimes.jp/main/html/rd/p/000000002.000119830.html"]]
     },
     {
       "id": "member-video", "title": "動画配信サービス向け会員マイページの受託開発", "period": "開発：2022/07 - 09 ／ 修正・運用・保守：2022/10 - 2023/07", "role": "Webアプリケーション開発 / 受託", "phases": "フロントエンド・API・AWS基盤の開発全般、修正・運用・保守",

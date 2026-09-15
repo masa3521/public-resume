@@ -54,7 +54,8 @@ def build_designs():
         result = []
         for i,p in enumerate(data['projects']):
             items = ''.join(f'<li><h4>{E(title)}</h4><p>{E(body)}</p></li>' for title,body in p['items'])
-            result.append(f'''<article class="project" id="{E(p['id'])}"><div class="project-aside"><span class="project-index">{i+1:02}</span><p class="period">{E(p['period'])}</p></div><div class="project-body"><h3>{E(p['title'])}</h3><p class="project-role">{E(p['role'])}</p><p class="project-phases">担当工程：{E(p['phases'])}</p><p class="project-overview">{E(p['overview'])}</p><ul class="project-items">{items}</ul><p class="tech"><span>使用技術</span>{E(p['tech'])}</p></div></article>''')
+            references = ''.join(f'<p class="note">公開資料：<a href="{E(url)}">{E(label)}</a></p>' for label, url in p.get('references', []))
+            result.append(f'''<article class="project" id="{E(p['id'])}"><div class="project-aside"><span class="project-index">{i+1:02}</span><p class="period">{E(p['period'])}</p></div><div class="project-body"><h3>{E(p['title'])}</h3><p class="project-role">{E(p['role'])}</p><p class="project-phases">担当工程：{E(p['phases'])}</p><p class="project-overview">{E(p['overview'])}</p><ul class="project-items">{items}</ul><p class="tech"><span>使用技術</span>{E(p['tech'])}</p>{references}</div></article>''')
         return ''.join(result)
 
     content = {

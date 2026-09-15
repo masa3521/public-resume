@@ -30,11 +30,12 @@ def table_html(headings, rows, cls, caption=None):
 
 
 def project_html(p):
+    references = ''.join(f'<p class="note">公開資料：<a href="{E(url)}">{E(label)}</a></p>' for label, url in p.get('references', []))
     return f'''<article class="project" id="{p['id']}">
       <p class="period">{E(p['period'])}</p><h3>{E(p['title'])}</h3>
       <p class="project-meta">{E(p['role'])}<br>担当工程：{E(p['phases'])}</p>
       <p>{E(p['overview'])}</p><ul>{''.join(f'<li><strong>{E(title)}</strong>{E(body)}</li>' for title, body in p['items'])}</ul>
-      <p class="tech"><span>使用技術</span>{E(p['tech'])}</p></article>'''
+      <p class="tech"><span>使用技術</span>{E(p['tech'])}</p>{references}</article>'''
 
 
 def build_html():
@@ -98,7 +99,10 @@ def build_pdf(font_path):
         parts = [para(p['title'],'h3'), para(f"{p['period']}  |  {p['role']}",'small'),para('担当工程：'+p['phases'],'small'),para(p['overview'])]
         for title, body in p['items']:
             parts += [para(title,'label'), para(body)]
-        parts += [para('使用技術：'+p['tech'],'small'),Spacer(1,7)]
+        parts += [para('使用技術：'+p['tech'],'small')]
+        for label, url in p.get('references', []):
+            parts.append(Paragraph(f'公開資料：<link href="{E(url)}" color="#225b89">{E(label)}</link>', styles['small']))
+        parts.append(Spacer(1,7))
         return parts
     story = [para('職務経歴書','label'),para(DATA['name'],'title'),para(DATA['title']),para('更新：'+DATA['updated'],'small'),heading('01  概要'),para(DATA['summary'])]
     for s in DATA['strengths']:
