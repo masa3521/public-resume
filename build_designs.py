@@ -17,10 +17,11 @@ DESIGNS = {
 }
 
 
-def build_designs():
-    data = json.loads((ROOT / 'content.json').read_text(encoding='utf-8'))
-    version = hashlib.sha256((ROOT / 'content.json').read_bytes()).hexdigest()[:12]
-    design_digest = hashlib.sha256((ROOT / 'content.json').read_bytes() + Path(__file__).read_bytes())
+def build_designs(data=None, output_dir=None):
+    OUT = Path(output_dir) / "designs" if output_dir else ROOT / "docs" / "designs"
+    data = data if data is not None else json.loads((ROOT / 'content.json').read_text(encoding='utf-8'))
+    version = hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode()).hexdigest()[:12]
+    design_digest = hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode() + Path(__file__).read_bytes())
     for asset in sorted(SOURCE.iterdir()):
         if asset.is_file():
             design_digest.update(asset.read_bytes())
@@ -36,15 +37,18 @@ def build_designs():
         return ''.join(f'<a href="#{key}">{labels[key]}</a>' for key in (order or labels))
 
     def identity():
-        return f'''<header class="identity" id="top"><div class="identity-name"><p class="eyebrow">PROFESSIONAL PROFILE</p><h1>{E(data['name'])}</h1><p class="name-en">{E(data['name_en'])}</p></div><div class="identity-info"><p class="role">{E(data['title'])}</p><p class="updated">更新：{E(data['updated'])}</p><a class="pdf-link" href="{pdf}">経歴PDFを開く <span aria-hidden="true">↗</span></a></div></header>'''
+        return f'''<header class="identity" id="top"><div class="identity-name"><p class="eyebrow">PROFESSIONAL PROFILE</p><h1>{E(data['name'])}</h1><p class="name-en">{E(data['name_en'])}</p></div><div class="identity-info"><p class="role">{E(data['title'])}</p><p class="updated">更新：{E(data['updated'])}</p><div class="export-links"><a class="pdf-link" href="{pdf}">経歴PDF</a><a class="pdf-link" href="../../skillsheet.xlsx?v={version}">Excel</a><a class="pdf-link" href="../../resume.md?v={version}">Markdown</a></div></div></header>'''
 
     def summary():
         strengths = ''.join(f'<li><span class="strength-index">0{i+1}</span><div><h3>{E(s["title"])}</h3><p>{E(s["text"])}</p></div></li>' for i,s in enumerate(data['strengths']))
         return f'<p class="summary-text">{E(data["summary"])}</p><ul class="strengths">{strengths}</ul>'
 
     def skills():
-        rows = ''.join(f'<div class="skill-row"><dt>{E(name)}<span>{E(years)}</span></dt><dd>{E(body)}</dd></div>' for name,years,body in data['skills'])
-        return f'<dl class="skills">{rows}</dl><p class="note">{E(data["experience_as_of"])}</p>'
+        groups = []
+        for group in data['skill_groups']:
+            rows = ''.join(f'<div class="skill-row"><dt>{E(name)}<span>{E(years)} / {E(current)}</span></dt><dd>{E(body)}</dd></div>' for name,years,current,body in group['rows'])
+            groups.append(f'<div class="skill-group"><h3>{E(group["name"])}</h3><dl class="skills">{rows}</dl></div>')
+        return f'<p class="note">{E(data["experience_as_of"])}</p>' + ''.join(groups)
 
     def history():
         rows = ''.join(f'<li><span class="history-period">{E(period)}</span><div><h3>{E(name)}</h3><p>{E(role)}</p></div></li>' for period,name,role in data['history'])
@@ -55,7 +59,8 @@ def build_designs():
         for i,p in enumerate(data['projects']):
             items = ''.join(f'<li><h4>{E(title)}</h4><p>{E(body)}</p></li>' for title,body in p['items'])
             references = ''.join(f'<p class="note">公開資料：<a href="{E(url)}">{E(label)}</a></p>' for label, url in p.get('references', []))
-            result.append(f'''<article class="project" id="{E(p['id'])}"><div class="project-aside"><span class="project-index">{i+1:02}</span><p class="period">{E(p['period'])}</p></div><div class="project-body"><h3>{E(p['title'])}</h3><p class="project-role">{E(p['role'])}</p><p class="project-phases">担当工程：{E(p['phases'])}</p><p class="project-overview">{E(p['overview'])}</p><ul class="project-items">{items}</ul><p class="tech"><span>使用技術</span>{E(p['tech'])}</p>{references}</div></article>''')
+            environment = '<dl class="environment">' + ''.join(f'<div><dt>{E(label)}</dt><dd>{E(body)}</dd></div>' for label,body in p['environment']) + '</dl>'
+            result.append(f'''<article class="project" id="{E(p['id'])}"><div class="project-aside"><span class="project-index">{i+1:02}</span><p class="period">{E(p['period'])}</p></div><div class="project-body"><h3>{E(p['title'])}</h3><p class="project-role">{E(p['role'])}</p><p class="project-phases">担当工程：{E(p['phases'])}</p><p class="project-phases">体制・規模：{E(p['team'])}</p><p class="project-overview">{E(p['overview'])}</p><ul class="project-items">{items}</ul>{environment}<p class="tech"><span>使用技術</span>{E(p['tech'])}</p>{references}</div></article>''')
         return ''.join(result)
 
     content = {
@@ -90,5 +95,4 @@ def build_designs():
 
 
 if __name__ == '__main__':
-    revision = build_designs()
-    print(f'Built 4 resume design alternatives; revision={revision}')
+    raise SystemExit('Use python build.py to keep Excel, PDF, Markdown and all designs in sync.')

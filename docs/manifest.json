@@ -1,0 +1,27 @@
+{
+  "revision": "c14f64f6ab94",
+  "source_sha256": "e2e4c9b05e74af0e215789ddd21d5bcdeace44e17f7efca40116cc2ba2c6d9f1",
+  "projects": 10,
+  "skills": 36,
+  "files": {
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "designs/a/index.html": "e3d849082a5fa1fbfeca272ac23112b43129e6351b0246bdabe2d65d07006c43",
+    "designs/a.css": "70e67d73bbb771abc4af3a02fb5db4df4e1edfd795cd3e7148c69fb7fbfdf877",
+    "designs/b/index.html": "25e59918691d89b33fa3998ebdfdaaec05c59603f4ce0f9c6046fc0c82b57d5f",
+    "designs/b.css": "5fcf6e3468c5207a8fc19527b14a5905359a3060ce316f0a5f90ad689d4915a5",
+    "designs/c/index.html": "f85599b8097d27241db7419f1b17afa38eaa98e9a2c69e42ed96c1ba13221b07",
+    "designs/c.css": "a23382e947ad6126c291878a58a4a5cbbcb2083fa9179ea7e881d615612faecd",
+    "designs/common.css": "7d18d5b33beca30142e7799e1bbb5fb52e53de3a9381f65e8d3a29fa54c44219",
+    "designs/d/index.html": "c44b896bda84069917e51b84a56e25650a3a20407c86627aa733062aed04e154",
+    "designs/d.css": "b6548600b04f309025db9d38664cdd11dc88a86a3187443697f8c71133942c0f",
+    "designs/gallery.css": "ce5dfdd8992c88000ce0971c758a014f2f7d52c3c7b1a3cc13b51ae771493b7e",
+    "designs/gallery.js": "61926bdfa2dd22685c757a7c265faa2f6acd609ff6166ad51fe144f116e8d1c3",
+    "designs/index.html": "3fdc5ea208cbe2f302b14abeb2565a0354642562d3fa0059f36094dbccded307",
+    "designs/navigation.js": "62f03fd11a6faef91aac6f462e619d007ec95ea6d636f928651a4f2cd06250b9",
+    "index.html": "62efe7af2c64439b327e4da0337368b1bc9e139ddc0671e9ee20bb83f77cfd15",
+    "resume.md": "4aa74ea70ff399fb17d44058be570651237ed43ae56d440be01aef5056e6baf1",
+    "resume.pdf": "251947a8465b83f658b639f113c5d050a0543ccf336631e5fd1b8fc550175c4f",
+    "skillsheet.xlsx": "fe4e5ad00d8448ba25da967aaf109802a495815e94543cef21e24304a5294aee",
+    "style.css": "ef06c4a9788903506223d57e59bf1303c510eb2800a2530612733589b13175af"
+  }
+}
