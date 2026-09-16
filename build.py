@@ -3,10 +3,12 @@ import argparse
 import hashlib
 import html
 import json
+import re
 from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import sys
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
@@ -22,8 +24,15 @@ E = html.escape
 NAV = [("summary", "概要"), ("skills", "技術スキル"), ("history", "職歴一覧"), ("experience", "案件経験"), ("about", "資格・仕事の進め方")]
 
 
-def revision(data):
-    return hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True).encode()).hexdigest()[:12]
+def revision(data, template=None):
+    digest = hashlib.sha256(json.dumps(data, ensure_ascii=False, sort_keys=True).encode())
+    # A template/renderer-only edit must invalidate cached download links too.
+    for relative in ['build.py', 'build_designs.py',
+                     'tools/export_resume_xlsx.mjs', 'tools/workbook_native.py',
+                     'tools/export_excel_pdf.py', 'tools/export_excel_pdf.applescript']:
+        digest.update((ROOT / relative).read_bytes())
+    digest.update((template or ROOT/'templates/skillsheet.xlsx').read_bytes())
+    return digest.hexdigest()[:12]
 
 
 def table_html(headings, rows, cls):
@@ -42,11 +51,13 @@ def project_html(p):
       {environment}<p class="tech"><span>使用技術</span>{E(p['tech'])}</p>{references}</article>'''
 
 
-def build_html(data, out):
-    version = revision(data)
+def build_html(data, out, artifact_version=None):
+    version = artifact_version or revision(data)
     css_version = hashlib.sha256((ROOT/'style.css').read_bytes()).hexdigest()[:12]
     pdf_link = f'resume.pdf?v={version}'
     exports = f'<a href="{pdf_link}">PDF</a><a href="skillsheet.xlsx?v={version}">Excel</a><a href="resume.md?v={version}">Markdown</a>'
+    if (out / 'skillsheet.pdf').is_file():
+        exports += f'<a href="skillsheet.pdf?v={version}">Excel書式PDF（A3横）</a>'
     nav = ''.join(f'<a href="#{key}">{label}</a>' for key, label in NAV)
     strengths = ''.join(f'<li><h3>{E(s["title"])}</h3><p>{E(s["text"])}</p></li>' for s in data['strengths'])
     skills = ''.join(f'<div class="skill-group"><h3>{E(g["name"])}</h3>{table_html(["技術","経験の目安","利用状況","経験した内容・使用場面"],g["rows"],"skills-detail")}</div>' for g in data['skill_groups'])
@@ -62,7 +73,7 @@ def build_html(data, out):
 <div class="layout"><aside class="sidebar"><p class="nav-label">CONTENTS</p><nav aria-label="目次">{nav}</nav><p class="small">更新：{E(data['updated'])}</p><div class="export-links">{exports}</div></aside>
 <main id="main"><header class="identity"><p class="eyebrow">職務経歴書</p><h1>{E(data['name'])}</h1><p class="name-en">{E(data['name_en'])}</p><p class="role">{E(data['title'])}</p><p class="updated">最終更新：{E(data['updated'])}</p><div class="export-links" aria-label="ファイルで読む">{exports}</div></header>
 <nav class="mobile-nav" aria-label="モバイル目次">{nav}</nav>
-<section id="summary"><h2><span class="number">01</span>概要</h2><p>{E(data['summary'])}</p><ul class="strengths">{strengths}</ul></section>
+<section id="summary"><h2><span class="number">01</span>概要・自己PR</h2><p>{E(data['summary'])}</p><ul class="strengths">{strengths}</ul></section>
 <section id="skills"><h2><span class="number">02</span>技術スキル</h2><p class="note">{E(data['experience_as_of'])}</p>{skills}</section>
 <section id="history"><h2><span class="number">03</span>職歴一覧</h2>{table_html(['期間','事業・領域','役割'],data['history'],'history')}<p class="note">{E(data['history_note'])}</p></section>
 <section id="experience"><h2><span class="number">04</span>案件経験</h2><ol class="project-index">{project_nav}</ol>{''.join(project_html(p) for p in data['projects'])}</section>
@@ -73,7 +84,7 @@ def build_html(data, out):
     shutil.copyfile(ROOT / 'style.css', out / 'style.css')
     (out / '.nojekyll').touch()
     from build_designs import build_designs
-    build_designs(data, out)
+    build_designs(data, out, artifact_version=version)
 
 
 def build_markdown(data, out):
@@ -82,6 +93,7 @@ def build_markdown(data, out):
     def table(headers, rows):
         return ['| ' + ' | '.join(map(md, headers)) + ' |', '| ' + ' | '.join('---' for _ in headers) + ' |', *['| ' + ' | '.join(map(md, row)) + ' |' for row in rows], '']
     lines = [f'# {data["name"]} — 職務経歴書', '', data['name_en'], '', data['title'], '', '更新：' + data['updated'], '', '## 概要', '', data['summary'], '']
+    lines += ['## 自己PR', '']
     for s in data['strengths']:
         lines += ['### ' + s['title'], '', s['text'], '']
     lines += ['## 技術スキル', '', data['experience_as_of'], '']
@@ -142,7 +154,7 @@ def build_pdf(data, out, font_path):
         parts[tail_start:] = [KeepTogether(parts[tail_start:])]
         parts.append(Spacer(1,9))
         return parts
-    story = [para('職務経歴書','label'),para(data['name'],'title'),para(data['name_en'],'small'),para(data['title']),para('更新：'+data['updated'],'small'),heading('01  概要'),para(data['summary'])]
+    story = [para('職務経歴書','label'),para(data['name'],'title'),para(data['name_en'],'small'),para(data['title']),para('更新：'+data['updated'],'small'),heading('01  概要・自己PR'),para(data['summary'])]
     for s in data['strengths']:
         story += [para(s['title'],'label'),para(s['text'])]
     story += [heading('02  技術スキル'),para(data['experience_as_of'],'small')]
@@ -165,8 +177,9 @@ def build_pdf(data, out, font_path):
     doc.build(story,onFirstPage=footer,onLaterPages=footer)
 
 
-def build_excel(source, out, node, qa_dir=None):
-    command = [str(node), str(ROOT / 'tools' / 'export_resume_xlsx.mjs'), str(source), str(out / 'skillsheet.xlsx')]
+def build_excel(source, out, node, template, qa_dir=None):
+    command = [str(node), str(ROOT / 'tools' / 'export_resume_xlsx.mjs'), str(source), str(out / 'skillsheet.xlsx'),
+               '--python', sys.executable, '--template', str(template)]
     if qa_dir:
         command += ['--qa-dir', str(qa_dir)]
     subprocess.run(command, check=True)
@@ -179,6 +192,8 @@ def main():
     parser.add_argument('--font', type=Path, help='Japanese TrueType font to embed in the PDF.')
     parser.add_argument('--node', type=Path, help='Node runtime with artifact-tool available; CODEX_ARTIFACT_NODE_MODULES can point to its dependencies.')
     parser.add_argument('--xlsx-qa-dir', type=Path, help='Save full workbook previews and verification reports.')
+    parser.add_argument('--excel-template', type=Path, default=ROOT/'templates/skillsheet.xlsx', help='Blank, public-safe original-format template.')
+    parser.add_argument('--excel-pdf', action='store_true', help='Also create skillsheet.pdf (A3 landscape; requires Microsoft Excel for Mac).')
     args = parser.parse_args()
     font_candidates = [args.font] if args.font else [Path('/Library/Fonts/Arial Unicode.ttf'),Path('/System/Library/Fonts/Supplemental/Arial Unicode.ttf'),Path('/usr/share/fonts/truetype/fonts-japanese-gothic.ttf'),Path('/usr/share/fonts/opentype/ipafont-gothic/ipag.ttf')]
     font = next((p for p in font_candidates if p and p.is_file()),None)
@@ -191,12 +206,21 @@ def main():
     source = args.source.resolve()
     source_bytes = source.read_bytes()
     data = json.loads(source_bytes)
+    artifact_version = revision(data, args.excel_template)
     if len({p['id'] for p in data['projects']}) != len(data['projects']):
         parser.error('Project ids must be unique.')
     out = args.output_dir.resolve()
+    if args.xlsx_qa_dir:
+        qa = args.xlsx_qa_dir.resolve()
+        if qa == out or out in qa.parents:
+            parser.error('--xlsx-qa-dir must be outside the publication output directory.')
     if out == ROOT or out in ROOT.parents or source == out or out in source.parents:
         parser.error('Output directory must not contain the source or repository.')
     out.parent.mkdir(parents=True,exist_ok=True)
+    reviewed_markdown = out/'resume.md'
+    markdown_before = reviewed_markdown.read_bytes() if reviewed_markdown.exists() else None
+    if markdown_before and re.search(r'^\s*→', markdown_before.decode('utf-8'), re.M):
+        parser.error('resume.md has review instructions. Apply them to content.json before regenerating.')
     if out.exists():
         previous_manifest = out/'manifest.json'
         if not previous_manifest.is_file():
@@ -211,20 +235,29 @@ def main():
         stage = Path(staging)
         snapshot = stage/'input.json'
         snapshot.write_text(json.dumps(data,ensure_ascii=False),encoding='utf-8')
-        build_excel(snapshot,stage,node,args.xlsx_qa_dir)
+        build_excel(snapshot,stage,node,args.excel_template.resolve(),args.xlsx_qa_dir)
         snapshot.unlink()
+        if args.excel_pdf:
+            subprocess.run([sys.executable,str(ROOT/'tools/export_excel_pdf.py'),
+                            str(stage/'skillsheet.xlsx'),str(stage/'skillsheet.pdf'),
+                            '--layout-json',str(stage/'skillsheet.layout.json')],check=True)
         build_pdf(data,stage,font)
         build_markdown(data,stage)
-        build_html(data,stage)
+        build_html(data,stage,artifact_version)
         manifest = {
-            'revision':revision(data),
+            'revision':artifact_version,
             'source_sha256':hashlib.sha256(source_bytes).hexdigest(),
+            'template_sha256':hashlib.sha256(args.excel_template.read_bytes()).hexdigest(),
+            'excel_format':'original-template',
             'projects':len(data['projects']),
             'skills':sum(len(g['rows']) for g in data['skill_groups']),
             'files':{str(p.relative_to(stage)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(stage.rglob('*')) if p.is_file()}
         }
         (stage/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         backup = stage.with_name(stage.name+'-previous')
+        markdown_now = reviewed_markdown.read_bytes() if reviewed_markdown.exists() else None
+        if markdown_now != markdown_before or source.read_bytes() != source_bytes:
+            raise RuntimeError('Source/Markdown changed while building; outputs were preserved. Rebuild after reviewing the edit.')
         try:
             if out.exists():
                 out.rename(backup)
@@ -236,7 +269,7 @@ def main():
         else:
             if backup.exists():
                 shutil.rmtree(backup)
-    print(f'Built Excel, PDF, Markdown and Web: {out}; revision={revision(data)}')
+    print(f'Built Excel, PDF, Markdown and Web: {out}; revision={artifact_version}')
 
 
 if __name__ == '__main__':

@@ -17,11 +17,12 @@ DESIGNS = {
 }
 
 
-def build_designs(data=None, output_dir=None):
+def build_designs(data=None, output_dir=None, artifact_version=None):
     OUT = Path(output_dir) / "designs" if output_dir else ROOT / "docs" / "designs"
     data = data if data is not None else json.loads((ROOT / 'content.json').read_text(encoding='utf-8'))
-    version = hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode()).hexdigest()[:12]
+    version = artifact_version or hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode()).hexdigest()[:12]
     design_digest = hashlib.sha256(json.dumps(data,ensure_ascii=False,sort_keys=True).encode() + Path(__file__).read_bytes())
+    design_digest.update(version.encode())
     for asset in sorted(SOURCE.iterdir()):
         if asset.is_file():
             design_digest.update(asset.read_bytes())
@@ -64,7 +65,7 @@ def build_designs(data=None, output_dir=None):
         return ''.join(result)
 
     content = {
-        'summary': ('01','概要','PROFILE', summary()),
+        'summary': ('01','概要・自己PR','PROFILE', summary()),
         'skills': ('02','技術スキル','EXPERTISE', skills()),
         'history': ('03','職歴一覧','CAREER', history()),
         'experience': ('04','案件経験','EXPERIENCE', projects()),

@@ -1,22 +1,31 @@
 {
   "name": "浜田 将彰",
+  "excel_profile": {
+    "specialty": "クラウド基盤・SRE / Webアプリケーション開発",
+    "scope": "要件定義から開発・運用・保守まで",
+    "cloud_experience": "AWS 約10年 / Azure 約3.5年",
+    "engagement": "受託・業務委託 / 自社サービス開発",
+    "focus": "クラウドインフラ（AWS / Azure）、IaC・構築自動化、監視・信頼性設計",
+    "tools": "AWS、Azure、Terraform、Ansible、Docker / ECS、GitHub Actions、Linux、Claude Code",
+    "work": "基盤設計・構築、クラウド移行、CI/CD、運用設計・改善、Web・SaaS連携の開発"
+  },
   "name_en": "Masaaki Hamada",
-  "title": "クラウド・IaC エンジニア / CTO",
+  "title": "SREエンジニア / CTO",
   "updated": "2026年9月16日",
-  "experience_as_of": "経験年数と利用状況は2026年8月時点の実務経験の概算です。同じ行に複数の技術がある場合、すべてを記載年数使ったという意味ではありません。並行して担当した期間は単純合算していません。Next.js・Vercel・Supabaseは2026年から使用しています。 複数技術をまとめた行の利用状況は、技術群単位の表示です。",
-  "summary": "物理サーバ・ネットワークからクラウド基盤まで、15年以上にわたり設計・構築・運用を経験。AWSを約10年、Azure・Terraformを約3.5年扱い、クラウド移行、IaC、CI/CD、監視設計に取り組んできました。2022年からは自社サービスの取締役・CTOとして、企画から開発・インフラ・運用までを担当しています。",
+  "experience_as_of": "",
+  "summary": "物理サーバ・ネットワークからクラウド基盤まで、15年以上にわたり設計・構築・運用を経験してきました。AWSを約10年、Azureを約3.5年扱い、クラウド移行、IaC、CI/CD、監視設計に取り組んでいます。2022年からは自社サービスの取締役・CTOとして、要件定義から開発、運用・保守まで一貫して担当しています。",
   "strengths": [
     {
-      "title": "クラウド基盤を設計し、コードで再現する",
-      "text": "AWS約10年、Azure・Terraform約3.5年。決済基盤では開発・検証・本番のほぼ全環境をIaC化し、数時間で再構築できる状態に整備。少人数の基盤立ち上げでは、設計から構築・運用設計まで一貫して担当します。"
+      "title": "信頼性と再現性を考慮した基盤設計",
+      "text": "AWS・Azureの基盤設計と、IaC・CI/CDによる環境構築の標準化を得意としています。決済基盤ではTerraformで開発・検証・本番のほぼ全環境をコード化し、数時間で再構築できる状態に整備しました。自動スケールや監視・通知、稼働率目標の設計も担当し、構築後の運用を見据えて基盤を整えています。"
     },
     {
-      "title": "規模と役割に応じて、運用・コストを改善する",
-      "text": "約10台のAWSサーバを対象に、時間帯別のAuto ScalingやSpot・RIの活用でコストを3〜4割削減。20名規模のチームでの専門担当、約10名の構築チームでのPM兼任、担当領域の単独遂行を経験しています。"
+      "title": "運用負荷とコストの改善",
+      "text": "リソースの使われ方と日々の運用を見直し、具体的な改善につなげてきました。公衆無線Wi-Fi基盤では、約10台のサーバに時間帯別のAuto ScalingとSpot・RIを適用し、AWSコストを3〜4割削減しました。"
     },
     {
-      "title": "事業運営と開発をつなぎ、小規模サービスを育てる",
-      "text": "自社サービスでは技術担当1名で企画・要件定義から実装・運用まで対応。Web・SaaS連携・クラウド基盤を横断して開発し、当初3名で担当していた運用をAI活用により1名で回せる形に改善しました。"
+      "title": "要件定義から運用・保守までの一貫した開発",
+      "text": "自社サービスでは技術担当1名で、Webアプリケーション、SaaS連携、クラウド基盤を横断して開発しています。予約・受講履歴の連携やAIレポートなどを要件定義から運用・保守まで担当し、採用・予算・技術選定にも携わっています。定型業務の手順化とAIによる自動化を進め、当初3名で担当していた運用を1名で対応できる形に改善しました。"
     }
   ],
   "history": [
@@ -61,43 +70,51 @@
       "社内SE"
     ]
   ],
-  "history_note": "動画サービスの受託案件は2022/07 - 09に開発、2022/10 - 2023/07は修正・運用・保守を担当。自社サービス・業務委託と並行。2013/02 - 08は資格取得期間、2016/12 - 2017/12はカナダへ語学留学。 社内ネットワークのリプレイス（2010/01 - 2013/01）は、社内インフラ業務と並行して担当しました。",
+  "history_note": "動画サービスの受託案件は2022/07 - 09に開発、2022/10 - 2023/07は修正・運用・保守を担当。自社サービス・業務委託と並行。2013/02 - 08は資格取得期間、2016/12 - 2017/12はカナダへ遊学。 社内ネットワークのリプレイス（2010/01 - 2013/01）は、社内インフラ業務と並行して担当しました。",
   "projects": [
     {
       "id": "own-service",
-      "title": "自社サービスの開発・運用",
+      "title": "オンラインヨガサービスの予約・受講基盤、AIレポート、法人向けポータルの開発・運用",
       "period": "2022/03 - 現在",
       "role": "取締役 / CTO",
       "phases": "企画・要件定義・技術選定・基本設計・詳細設計・構築・実装・運用設計・保守・運用・障害対応",
-      "overview": "グローバル向けのオンライン1on1ヨガ・サブスクリプションサービス（BtoC/BtoB）で技術全般を担当。EC・予約・配信基盤と、予約連携・AIレポート・会議アカウント管理を要件定義から設計・開発、運用・保守まで担っています。採用・予算・技術選定などの意思決定にも携わっています。",
+      "overview": "グローバル向けのオンライン1on1ヨガ・サブスクリプションサービス（BtoC/BtoB）で技術全般を担当しています。個人向けのEC・予約・受講基盤、AIレッスンレポート、Zoom会議管理、法人向け予約ポータルを開発・運用しています。",
       "items": [
         [
-          "EC・予約・契約情報の統合",
-          "Shopify・Sesami・Zoom・Recharge・Klaviyoを組み合わせ、EC・予約・配信基盤を設計・構築・運用。生徒・講師の現地時刻とJST・PT・UTCが関わる予約情報の整合性を考慮して連携しました。"
+          "要件定義・技術選定と開発全体の担当",
+          "技術担当1名で、要件定義、技術選定、基本・詳細設計、実装、運用設計、保守・運用、障害対応まで担当しています。取締役・CTOとして、採用・予算に関する意思決定にも携わっています。"
         ],
         [
-          "予約・受講履歴のAPI連携",
-          "Node.js・ExpressでShopifyと予約・契約情報を連携。講師情報を含む予約データ・受講URL・タイムゾーンをShopify Metaobjectに保存し、顧客と紐付けました。予約変更・キャンセルに合わせた会議情報の更新、顧客別の受講履歴・注文履歴・契約情報の取得、レッスン単位のコメント管理を実装しました。"
+          "EC・予約・契約情報とレッスン配信の統合",
+          "Shopify・Sesami・Zoom・Recharge・Klaviyoを組み合わせ、EC・予約・契約情報とレッスン配信を連携しました。生徒・講師の現地時刻とJST・PT・UTCが関わる予約情報の整合性を考慮して設計・構築しています。"
+        ],
+        [
+          "予約・受講履歴のAPIと変更・キャンセル連携",
+          "Node.js・Expressで予約・契約情報の連携APIを実装しました。講師情報、予約データ、受講URL、タイムゾーンをShopify Metaobjectに保存して顧客と紐付け、予約変更・キャンセルに伴う会議情報の更新、顧客別の受講・注文・契約情報の取得、レッスン単位のコメント管理に対応しました。"
         ],
         [
           "AIレッスンレポートの生成・配信",
-          "Python・AWS Lambdaでレッスン字幕を取得し、OpenAI APIによるレポート生成、Gmailでのメール配信、Shopifyへの保存、Google Docsへの履歴蓄積を自動化。字幕生成の遅延に対応する再試行と、DynamoDBを使って重複処理を抑える実行ロックを実装しました。2025年3月18日に正式リリース。"
+          "Python・AWS Lambdaでレッスン字幕を取得し、OpenAI APIによるレポート生成、Gmailでのメール配信、Shopifyへの保存、Google Docsへの履歴蓄積までを自動化しました。2025年3月18日に正式リリースしています。"
+        ],
+        [
+          "AIレポート処理の再試行・重複抑制",
+          "字幕生成の遅延に対応する再試行処理と、DynamoDBを使って重複処理を抑える実行ロックを実装しました。"
         ],
         [
           "会議アカウントの自動割り当て",
-          "Python・AWS Lambdaで複数のZoomアカウントの会議予定を調べ、開始・終了時刻の重複判定で空きアカウントを選定。会議の作成・削除とGoogle Calendar・スプレッドシートへの記録を連携しました。"
+          "Python・AWS Lambdaで複数のZoomアカウントの会議予定を取得し、開始・終了時刻の重複判定で空きアカウントを選定しました。会議の作成・削除と、Google Calendar・スプレッドシートへの記録を連携しています。"
         ],
         [
-          "運用と保管コストの改善",
-          "録画アーカイブ約1.75TiBを、保管から90日でS3 Glacier Instant Retrievalへ移すライフサイクルを設計。月額の実測で保管コストを約7割削減しました。CloudWatch・SNSからSlackへのアラーム通知も整備しました。"
+          "監視・アラーム通知の整備",
+          "CloudWatch・SNSからSlackへのアラーム通知を整備しています。"
         ],
         [
-          "法人向けポータルの立ち上げ",
-          "2026/07からNext.js・Vercel・Supabaseで法人向け予約ポータルを新規開発。検証・本番の環境分離、PostgreSQL RLSによる認可設計、PlaywrightによるE2Eテストを整備しました。E2Eテストは本番データから隔離する構成を設計しています。"
+          "法人向け予約ポータルの開発と認可・テスト設計",
+          "2026年7月からNext.js・Vercel・Supabaseで法人向け予約ポータルを新規開発しています。検証・本番の環境分離、PostgreSQL RLSによる認可、PlaywrightによるE2Eテストを整備しました。E2Eテストは本番データから隔離する構成を設計しています。"
         ],
         [
-          "AIを活用した事業運用の改善",
-          "2025年からClaude Codeを主軸に開発・運用を進め、定型オペレーションを再利用可能な手順として自動化。採用・予算・技術選定を含む事業運営と並行し、当初3名で回していた運用をAI活用により1名で対応できる形に改善しました。"
+          "AIを活用した定型運用の自動化",
+          "2025年からClaude Codeを主軸に開発・運用を進め、定型オペレーションを再利用可能な手順として自動化しました。当初3名で担当していた運用を、AI活用により1名で対応できる形に改善しています。"
         ]
       ],
       "tech": "AWS Lambda / API Gateway / DynamoDB / S3 / Docker / Shopify Admin GraphQL API・App Proxy / Liquid / Node.js / Express / Python / OpenAI API / Zoom API / Gmail API / Google Docs API / Google Calendar API / Google Sheets API / Next.js / TypeScript / Vercel / Supabase / Playwright / Claude Code / MCP / GitHub Actions / CloudWatch / SNS / Sesami API / Recharge API / Klaviyo API / Serverless Framework",
@@ -125,7 +142,20 @@
           "クラウド・ツール",
           "AWS (EC2 / Lambda / S3 / ECS / ECR / CloudWatch) / Vercel / Next.js / TypeScript / Shopify / Sesami / Zoom / Recharge / Klaviyo の各API / Playwright / GitHub Actions / Docker / Node.js / Python / OpenAI API / Claude Code"
         ]
-      ]
+      ],
+      "workbook": {
+        "start": "2022-03",
+        "end": null,
+        "phase_flags": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
     },
     {
       "id": "cloud-consulting",
@@ -163,7 +193,20 @@
           "AWS (ALB / Route 53 / S3)"
         ]
       ],
-      "tech": "Amazon Linux / (EC2) / Apache HTTP Server / PHP / AWS (ALB / Route 53 / S3)"
+      "tech": "Amazon Linux / (EC2) / Apache HTTP Server / PHP / AWS (ALB / Route 53 / S3)",
+      "workbook": {
+        "start": "2026-03",
+        "end": "2026-07",
+        "phase_flags": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
     },
     {
       "id": "member-video",
@@ -201,7 +244,20 @@
           "配信・データストア",
           "S3 / CloudFront / DynamoDB"
         ]
-      ]
+      ],
+      "workbook": {
+        "start": "2022-07",
+        "end": "2023-07",
+        "phase_flags": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      }
     },
     {
       "id": "payments",
@@ -243,7 +299,20 @@
           "Azure (VMSS / App Service / AD / Storage / DNS / Automation) / AWS (EC2 / ECS / S3 / ALB / CloudFront / API Gateway / Lambda) / Terraform / Ansible / Docker / GitHub Actions / Azure Monitor / Log Analytics / Amazon CloudWatch / PowerShell"
         ]
       ],
-      "tech": "Linux (RHEL) / Ubuntu 18.04 LTS / Azure SQL Database / Amazon RDS / Azure (VMSS / App Service / AD / Storage / DNS / Automation) / AWS (EC2 / ECS / S3 / ALB / CloudFront / API Gateway / Lambda) / Terraform / Ansible / Docker / GitHub Actions / Azure Monitor / Log Analytics / Amazon CloudWatch / PowerShell"
+      "tech": "Linux (RHEL) / Ubuntu 18.04 LTS / Azure SQL Database / Amazon RDS / Azure (VMSS / App Service / AD / Storage / DNS / Automation) / AWS (EC2 / ECS / S3 / ALB / CloudFront / API Gateway / Lambda) / Terraform / Ansible / Docker / GitHub Actions / Azure Monitor / Log Analytics / Amazon CloudWatch / PowerShell",
+      "workbook": {
+        "start": "2020-01",
+        "end": "2023-06",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ]
+      }
     },
     {
       "id": "telecom-cms",
@@ -281,7 +350,20 @@
           "Amazon EC2 / AWS CloudFormation / Docker / Ansible / Amazon EMR / PySpark / Python"
         ]
       ],
-      "tech": "Amazon Linux / Linux (RHEL) / PostgreSQL / Apache Tomcat / Nginx / Apache HTTP Server / Amazon EC2 / AWS CloudFormation / Docker / Ansible / Amazon EMR / PySpark / Python"
+      "tech": "Amazon Linux / Linux (RHEL) / PostgreSQL / Apache Tomcat / Nginx / Apache HTTP Server / Amazon EC2 / AWS CloudFormation / Docker / Ansible / Amazon EMR / PySpark / Python",
+      "workbook": {
+        "start": "2019-05",
+        "end": "2019-12",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ]
+      }
     },
     {
       "id": "telecom-cost",
@@ -311,7 +393,20 @@
           "Amazon EC2 / (Auto Scaling / Spot / RI) / Ansible / Jenkins"
         ]
       ],
-      "tech": "Amazon Linux / Linux (RHEL) / Windows Server / Amazon EC2 / (Auto Scaling / Spot / RI) / Ansible / Jenkins"
+      "tech": "Amazon Linux / Linux (RHEL) / Windows Server / Amazon EC2 / (Auto Scaling / Spot / RI) / Ansible / Jenkins",
+      "workbook": {
+        "start": "2018-01",
+        "end": "2019-04",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ]
+      }
     },
     {
       "id": "telecom",
@@ -353,7 +448,20 @@
           "Amazon EC2 / Ansible / Jenkins / Apache JMeter / F5 BIG-IP"
         ]
       ],
-      "tech": "Amazon Linux / Linux (RHEL) / KVM / Amazon RDS / Amazon DynamoDB / Amazon ElastiCache / Amazon Redshift / Apache HTTP Server / BIND / Nginx / Apache Tomcat / FreeRADIUS / Zabbix / Amazon EC2 / Ansible / Jenkins / Apache JMeter / F5 BIG-IP"
+      "tech": "Amazon Linux / Linux (RHEL) / KVM / Amazon RDS / Amazon DynamoDB / Amazon ElastiCache / Amazon Redshift / Apache HTTP Server / BIND / Nginx / Apache Tomcat / FreeRADIUS / Zabbix / Amazon EC2 / Ansible / Jenkins / Apache JMeter / F5 BIG-IP",
+      "workbook": {
+        "start": "2014-12",
+        "end": "2016-07",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
     },
     {
       "id": "carrier",
@@ -391,7 +499,20 @@
           "Cisco"
         ]
       ],
-      "tech": "Linux (RHEL) / Oracle Linux / Solaris / VMware ESXi / Oracle Database / Cisco"
+      "tech": "Linux (RHEL) / Oracle Linux / Solaris / VMware ESXi / Oracle Database / Cisco",
+      "workbook": {
+        "start": "2013-09",
+        "end": "2014-11",
+        "phase_flags": [
+          false,
+          false,
+          false,
+          true,
+          false,
+          true,
+          false
+        ]
+      }
     },
     {
       "id": "internal-network",
@@ -417,7 +538,20 @@
           "Cisco / Allied Telesis / HP ProCurve / ALAXALA"
         ]
       ],
-      "tech": "Cisco / Allied Telesis / HP ProCurve / ALAXALA"
+      "tech": "Cisco / Allied Telesis / HP ProCurve / ALAXALA",
+      "workbook": {
+        "start": "2010-01",
+        "end": "2013-01",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
     },
     {
       "id": "internal",
@@ -451,7 +585,20 @@
           "Active Directory / Apache HTTP Server / IIS / BIND / Postfix / Squid"
         ]
       ],
-      "tech": "Linux (RHEL) / FreeBSD / Windows 2000 Server / Windows Server 2003 / Windows Server 2008 / Oracle Database / MySQL / Active Directory / Apache HTTP Server / IIS / BIND / Postfix / Squid"
+      "tech": "Linux (RHEL) / FreeBSD / Windows 2000 Server / Windows Server 2003 / Windows Server 2008 / Oracle Database / MySQL / Active Directory / Apache HTTP Server / IIS / BIND / Postfix / Squid",
+      "workbook": {
+        "start": "2008-04",
+        "end": "2013-01",
+        "phase_flags": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ]
+      }
     }
   ],
   "qualifications": "基本情報技術者。LPIC-3・CCNAは取得歴あり（現在は失効）。",
@@ -470,7 +617,7 @@
           "ストレージ・DB(S3/RDS/DynamoDB/ElastiCache)",
           "約7年",
           "使用中",
-          "Wi-Fi 基盤・決済基盤のデータストア、録画アーカイブ約1.75TiBのライフサイクル設計(Glacier Instant Retrieval)"
+          "Wi-Fi 基盤・決済基盤のデータストア"
         ],
         [
           "ネットワーク・配信(VPC/ELB/CloudFront/Route 53/API Gateway)",
@@ -723,5 +870,6 @@
         ]
       ]
     }
-  ]
+  ],
+  "as_of_month": "2026-09"
 }
